@@ -1,9 +1,17 @@
 import express, { Request, Response } from "express";
 import { dbClient } from "@repo/db/client";
+import { getPreSignedUrl } from "@repo/aws";
+import { router } from "./routes/index.js";
+import cors from "cors";
+
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
+app.use("/api", router);
+
+console.log(getPreSignedUrl());
 app.get("/hello", async (req: Request, res: Response) => {
   // const { email, password, username } = req.body;
   const users = await dbClient.user.findMany();

@@ -45,8 +45,9 @@ model UploadVideo {
 model VideoPart {
   id           String      @id @default(uuid())
   etag         String
-  partNumber   String
+  partNumber   Int
   videoId      String
+  uploadId     String
   videoDetails UploadVideo @relation(fields: [videoId], references: [id])
   createdAt    DateTime    @default(now())
   updatedAt    DateTime    @updatedAt
